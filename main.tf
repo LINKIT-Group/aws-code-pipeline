@@ -1,5 +1,12 @@
+
+resource "random_string" "s3" {
+  length = 10
+  special = false
+  lower = true
+}
+
 resource "aws_s3_bucket" "source" {
-  bucket        = "${var.name}-${var.environment}"
+  bucket        = "${var.name}-${var.environment}-${random_string.s3.result}"
   acl           = "private"
   force_destroy = true
 }
